@@ -1,2 +1,2 @@
 # ProyectoIntegrador1
-Trabajo Practico de la comisión 3 
+Trabajo Práctico de la comisión 3 
