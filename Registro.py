@@ -1,5 +1,19 @@
 class Registro:
-    def __init__ (self, nroRegistro, tipoNormativa, nroNormativa, fecha, descripcion, categoria, jurisdiccion, organoLegislativo, palabrasClaves):
+    numero_registro = 0
+
+    def crear_registro(self, tipoNormativa, nroNormativa, fecha, descripcion, categoria, jurisdiccion, organoLegislativo, palabrasClaves):
+        Registro.numero_registro += 1
+        self.nroRegistro = Registro.numero_registro
+        self.tipoNormativa = tipoNormativa
+        self.nroNormativa = nroNormativa
+        self.fecha = fecha
+        self.descripcion = descripcion
+        self.categoria = categoria
+        self.jurisdiccion = jurisdiccion
+        self.organoLegislativo = organoLegislativo
+        self.palabrasClaves = palabrasClaves
+
+    def modificar_registro(self, nroRegistro, tipoNormativa, nroNormativa, fecha, descripcion, categoria, jurisdiccion, organoLegislativo, palabrasClaves):   
         self.nroRegistro = nroRegistro
         self.tipoNormativa = tipoNormativa
         self.nroNormativa = nroNormativa

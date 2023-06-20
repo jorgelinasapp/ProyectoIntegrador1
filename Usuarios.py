@@ -21,3 +21,8 @@ class Usuarios:
             'rol': rol
         }
         self.__usuarios__.append(usuario)
+    
+    def buscar_usuario(self, nombre):
+        for user in self.__usuarios__:
+            if user['nombre'] == nombre:
+                return user
