@@ -1,14 +1,17 @@
+#IMPORTS
 from BaseDeDatos import BaseDeDatos;
 from Usuarios import Usuarios;
 from Registro import Registro;
 from funciones import formulario_registro
+
+
 #creamos los registros
 normativa1 = Registro()
-normativa1.crear_registro('Ley', 20744, '27/9/1974', 'Ley de Contrato de Trabajo', 'Laboral', 'Nacional', 'Congreso Nacional', ['Trabajo', 'Contrato', 'Empleador', 'Remuneraciones', 'Jornada Completa', 'Vacaciones', 'Extinción'])
+normativa1.crear_registro('ley', 20744, '27/9/1974', 'Ley de Contrato de Trabajo', 'Laboral', 'Nacional', 'Congreso Nacional', ['Trabajo', 'Contrato', 'Empleador', 'Remuneraciones', 'Jornada Completa', 'Vacaciones', 'Extinción'])
 normativa2 = Registro()
-normativa2.crear_registro('Decreto', 144, '22/3/2022', 'Reglamentación del guardería y salas maternales - Art. 179 L.C.T.', 'Laboral', 'Nacional', 'Congreso Nacional', ['Guarderías', 'Salas Maternales', 'Empleadores', 'Cuidados', 'Asistencia'])
+normativa2.crear_registro('decreto', 144, '22/3/2022', 'Reglamentación del guardería y salas maternales - Art. 179 L.C.T.', 'Laboral', 'Nacional', 'Congreso Nacional', ['Guarderías', 'Salas Maternales', 'Empleadores', 'Cuidados', 'Asistencia'])
 normativa3 = Registro()
-normativa3.crear_registro('Resolución', 2316, '26/9/2007', 'Certificación de Servicios y Remuneraciones', 'Laboral', 'Nacional', 'Congreso Nacional', ['Trabajo', 'Servicios', 'Aportes', 'Jubilación', 'Certificación', 'ANSeS', 'Trámites'])
+normativa3.crear_registro('resolución', 2316, '26/9/2007', 'Certificación de Servicios y Remuneraciones', 'Laboral', 'Nacional', 'Congreso Nacional', ['Trabajo', 'Servicios', 'Aportes', 'Jubilación', 'Certificación', 'ANSeS', 'Trámites'])
 
 #ingresamos los registros a la base de datos
 baseDeDatos = BaseDeDatos()
@@ -22,6 +25,7 @@ usuarios = Usuarios()
 salir = False
 continuar = False
 while salir == False:
+    print('')
     print('¡Bienvenido!')
     inicio = None
     while (inicio not in [1, 2, 3]):
@@ -35,6 +39,7 @@ while salir == False:
             break
         elif inicio == 1:
              while True:
+                print('')
                 print('LOGIN')
                 nombre = input('Ingrese su nombre: ')
                 contraseña = input('Ingrese su contraseña: ')
@@ -43,6 +48,7 @@ while salir == False:
                     break
                 else:
                     print('Usuario o contraseña inválidos')
+                    break
         elif inicio == 2:
             #REGISTRO
             while True:

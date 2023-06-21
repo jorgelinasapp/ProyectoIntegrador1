@@ -1,4 +1,17 @@
 from Registro import Registro
+import mysql.connector
+
+mydb = mysql.connector.connect(host="localhost", user="root", password="password", database="proyectoFinal")
+
+mycursor = mydb.cursor()
+mycursor.execute("SHOW DATABASES")
+
+for x in mycursor:
+    if x == 'ispc':
+        mycursor.execute('USE ispc')
+    else:
+        mycursor.execute("CREATE DATABASE mydatabase")
+
 class BaseDeDatos:
     def __init__(self):
         self.__baseDeDatos__ = []
