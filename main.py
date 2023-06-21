@@ -82,6 +82,9 @@ while salir == False:
                         print("Fecha: " + str(consultaPorLey[1]))
                         print("Descripción: "+ consultaPorLey[2])
                         print("Tipo Categoría: " + consultaPorLey[3])
+                        print("Jurisdicción: "+ consultaPorLey[4])
+                        print("Órgano Legislativo: " + consultaPorLey[5])
+                        print("Tipo Normativa: " + consultaPorLey[6])
                     else:
                         print('No hubo coincidencias')
                         break
@@ -95,6 +98,9 @@ while salir == False:
                             print("Fecha: " + str(objeto[1]))
                             print("Descripción: "+ objeto[2])
                             print("Tipo Categoría: " + objeto[3])
+                            print("Jurisdicción: "+ objeto[4])
+                            print("Órgano Legislativo: " + objeto[5])
+                            print("Tipo Normativa: " + objeto[6])
                     else: 
                         print('No hubo coincidencias')
                         break

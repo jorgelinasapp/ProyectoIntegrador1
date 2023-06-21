@@ -5,11 +5,11 @@ def formulario_registro(usuario, baseDeDatos, nroRegistro):
     while error == False:
         tipoNormativa = int(input('Tipo Normativa \n Ingrese una de las siguientes opciones: \n 1 - ley \n 2 - decreto \n 3 - resolución \n'))
         if tipoNormativa == 1:
-            tipoNormativa = "ley"
+            tipoNormativa = "Ley"
         elif tipoNormativa == 2:
-            tipoNormativa = "decreto"
+            tipoNormativa = "Decreto"
         elif tipoNormativa == 3:
-            tipoNormativa = "resolucion"
+            tipoNormativa = "Resolución"
         else:
             print('Valor incorrecto')
             error = True
@@ -19,32 +19,32 @@ def formulario_registro(usuario, baseDeDatos, nroRegistro):
         descripcion = input('Ingrese una descripción: ')
         categoria = int(input('Categoría \n Ingrese una de las siguientes opciones: \n 1 - laboral \n 2 - penal \n 3 - civil \n 4 - comercial \n 5 - familia y sucesiones \n 6 - agrario y ambiental \n 7 - minería \n 8 - derecho informático \n'))
         if categoria == 1:
-            categoria = "laboral"
+            categoria = "Laboral"
         elif categoria == 2:
-            categoria = "penal"
+            categoria = "Penal"
         elif categoria == 3:
-            categoria = "civil"
+            categoria = "Civil"
         elif categoria == 4:
-            categoria = "comercial"
+            categoria = "Comercial"
         elif categoria == 5:
-            categoria = "familia y sucesiones"
+            categoria = "Familia y Sucesiones"
         elif categoria == 6:
-            categoria = "agrario y ambiental"
+            categoria = "Agrario y Ambiental"
         elif categoria == 7:
-            categoria = "mineria"
+            categoria = "Minería"
         elif categoria == 8:
-            categoria = "derecho informatico"
+            categoria = "Derecho informático"
         else:
             print('Valor incorrecto')
             error = True
             break
         jurisdiccion = int(input('Jurisdicción \n Seleccione una opción: \n 1 - Nacional \n 2 - Provincial \n'))
         if jurisdiccion == 1:
-            jurisdiccion = "nacional"
-            organoLegislativo = "congreso nacional"
+            jurisdiccion = "Nacional"
+            organoLegislativo = "Congreso Nacional"
         elif jurisdiccion == 2:
-            jurisdiccion = "provincial"
-            organoLegislativo = "legislatura pcia de cba"
+            jurisdiccion = "Provincial"
+            organoLegislativo = "Legislatura Pcia Cba"
         else:
             print('Valor incorrecto')
             error = True
@@ -71,8 +71,7 @@ def formulario_registro(usuario, baseDeDatos, nroRegistro):
             baseDeDatos.admin_agregar(nuevoRegistro, usuario)
             print('Se ha agregado con éxito \n')
             print('')
-            for clave, valor in nuevoRegistro.imprimir():
-                    print(clave, ":", valor)
+            print(baseDeDatos.buscar_por_ley(nroNormativa))
             print('')
             break
         else:
