@@ -5,20 +5,9 @@ from Registro import Registro;
 from funciones import formulario_registro
 
 
-#creamos los registros
-normativa1 = Registro()
-normativa1.crear_registro('ley', 20744, '27/9/1974', 'Ley de Contrato de Trabajo', 'Laboral', 'Nacional', 'Congreso Nacional', ['Trabajo', 'Contrato', 'Empleador', 'Remuneraciones', 'Jornada Completa', 'Vacaciones', 'Extinción'])
-normativa2 = Registro()
-normativa2.crear_registro('decreto', 144, '22/3/2022', 'Reglamentación del guardería y salas maternales - Art. 179 L.C.T.', 'Laboral', 'Nacional', 'Congreso Nacional', ['Guarderías', 'Salas Maternales', 'Empleadores', 'Cuidados', 'Asistencia'])
-normativa3 = Registro()
-normativa3.crear_registro('resolución', 2316, '26/9/2007', 'Certificación de Servicios y Remuneraciones', 'Laboral', 'Nacional', 'Congreso Nacional', ['Trabajo', 'Servicios', 'Aportes', 'Jubilación', 'Certificación', 'ANSeS', 'Trámites'])
 
-#ingresamos los registros a la base de datos
+
 baseDeDatos = BaseDeDatos()
-baseDeDatos.agregar(normativa1)
-baseDeDatos.agregar(normativa2)
-baseDeDatos.agregar(normativa3)
-
 usuarios = Usuarios()
 
 #INICIO
@@ -86,9 +75,13 @@ while salir == False:
                 elif consulta == 1:
                     ley = int(input('Ingrese un número de ley: '))
                     consultaPorLey = baseDeDatos.buscar_por_ley(ley)
+                    
                     if consultaPorLey != False:
-                        for clave, valor in consultaPorLey.imprimir():
-                            print(f"{clave}: {valor}")
+                        print('')
+                        print("Nro ley: " + str(consultaPorLey[0]))
+                        print("Fecha: " + str(consultaPorLey[1]))
+                        print("Descripción: "+ consultaPorLey[2])
+                        print("Tipo Categoría: " + consultaPorLey[3])
                     else:
                         print('No hubo coincidencias')
                         break
@@ -96,11 +89,12 @@ while salir == False:
                     palabraClave = input('Ingrese una palabra clave: ')
                     consultaPorPalabraClave = baseDeDatos.buscar_por_palabra_clave(palabraClave)
                     if consultaPorPalabraClave != False:
-                        for registro in consultaPorPalabraClave:
-                            print('\n')
-                            for clave, valor in registro.imprimir():
-                                print(clave, ":", valor)
-                        print('\n')
+                        for objeto in consultaPorPalabraClave:
+                            print('')
+                            print("Nro ley: " + str(objeto[0]))
+                            print("Fecha: " + str(objeto[1]))
+                            print("Descripción: "+ objeto[2])
+                            print("Tipo Categoría: " + objeto[3])
                     else: 
                         print('No hubo coincidencias')
                         break

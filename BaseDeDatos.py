@@ -1,29 +1,25 @@
 from Registro import Registro
 import mysql.connector
 
-mydb = mysql.connector.connect(host="localhost", user="root", password="password", database="proyectoFinal")
-
-mycursor = mydb.cursor()
-mycursor.execute("SHOW DATABASES")
-
-for x in mycursor:
-    if x == 'ispc':
-        mycursor.execute('USE ispc')
-    else:
-        mycursor.execute("CREATE DATABASE mydatabase")
 
 class BaseDeDatos:
     def __init__(self):
-        self.__baseDeDatos__ = []
+        self.mydb = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="password",
+            database="proyectoFinal"
+        )
+        self.mycursor = self.mydb.cursor()
 
     def buscar_por_ley(self, ley):
-        for registro in self.__baseDeDatos__:
-            if (registro.nroNormativa == ley):
-                return registro
+        query = "SELECT n.NroNormativa, n.Fecha, n.Descripcion, c.TipoCategoria FROM normativa n JOIN categoria c ON c.id_categoria = n.id_Categoria WHERE n.NroNormativa = %s ;"
+        params = (ley,)
+        self.mycursor.execute(query, params)
+        result = self.mycursor.fetchone()
+        if result:
+            return result
         return False
-    
-    def agregar(self, registro):
-        self.__baseDeDatos__.append(registro)
 
     def buscar_por_nroRegistro(self, nroRegistro):
         for registro in self.__baseDeDatos__:
@@ -32,15 +28,13 @@ class BaseDeDatos:
         return False
     
     def buscar_por_palabra_clave(self, palabraClave):
-        busqueda = []
-        for registro in self.__baseDeDatos__:
-            for keyword in registro.palabrasClaves:
-                if palabraClave in keyword:
-                    busqueda.append(registro)
-        if busqueda:
-            return busqueda
-        else:
-            return False
+        query = "SELECT n.NroNormativa, n.Fecha, n.Descripcion, c.TipoCategoria FROM normativa n JOIN categoria c ON c.id_categoria = n.id_Categoria WHERE n.PalabrasClave LIKE %s ;"
+        params = ('%' + palabraClave + '%',)
+        self.mycursor.execute(query, params)
+        result = self.mycursor.fetchall()
+        if result:
+            return result
+        return False
 
         
     def admin_agregar(self, registro, usuario):
