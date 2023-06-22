@@ -4,13 +4,7 @@ def formulario_registro(usuario, baseDeDatos, nroRegistro):
     error = False
     while error == False:
         tipoNormativa = int(input('Tipo Normativa \n Ingrese una de las siguientes opciones: \n 1 - ley \n 2 - decreto \n 3 - resolución \n'))
-        if tipoNormativa == 1:
-            tipoNormativa = "Ley"
-        elif tipoNormativa == 2:
-            tipoNormativa = "Decreto"
-        elif tipoNormativa == 3:
-            tipoNormativa = "Resolución"
-        else:
+        if tipoNormativa not in [1, 2, 3]:
             print('Valor incorrecto')
             error = True
             break
@@ -18,37 +12,19 @@ def formulario_registro(usuario, baseDeDatos, nroRegistro):
         fecha = input("Ingrese la fecha (DD/MM/AAAA): ")
         descripcion = input('Ingrese una descripción: ')
         categoria = int(input('Categoría \n Ingrese una de las siguientes opciones: \n 1 - laboral \n 2 - penal \n 3 - civil \n 4 - comercial \n 5 - familia y sucesiones \n 6 - agrario y ambiental \n 7 - minería \n 8 - derecho informático \n'))
-        if categoria == 1:
-            categoria = "Laboral"
-        elif categoria == 2:
-            categoria = "Penal"
-        elif categoria == 3:
-            categoria = "Civil"
-        elif categoria == 4:
-            categoria = "Comercial"
-        elif categoria == 5:
-            categoria = "Familia y Sucesiones"
-        elif categoria == 6:
-            categoria = "Agrario y Ambiental"
-        elif categoria == 7:
-            categoria = "Minería"
-        elif categoria == 8:
-            categoria = "Derecho informático"
-        else:
+        if categoria not in [1,2,3,4,5,6,7,8]:
             print('Valor incorrecto')
             error = True
             break
         jurisdiccion = int(input('Jurisdicción \n Seleccione una opción: \n 1 - Nacional \n 2 - Provincial \n'))
-        if jurisdiccion == 1:
-            jurisdiccion = "Nacional"
-            organoLegislativo = "Congreso Nacional"
-        elif jurisdiccion == 2:
-            jurisdiccion = "Provincial"
-            organoLegislativo = "Legislatura Pcia Cba"
-        else:
+        if jurisdiccion not in [1,2]:
             print('Valor incorrecto')
             error = True
             break
+        elif jurisdiccion == 1:
+            organoLegislativo = 1
+        elif jurisdiccion == 2:
+            organoLegislativo = 2
         finPalabrasClaves = False
         while finPalabrasClaves == False:
             palabrasClaves = []

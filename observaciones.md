@@ -7,6 +7,3 @@ PASOS:
 
 
 En el órgano legislativo las opciones deben ser "Legislatura Pcia Cba" (escrito de esa manera) y "Congreso Nacional"
-
-No me funciona el metodo "admin_agregar" de la clase BaseDeDatos. 
-Falta editar los métodos "admin_modificar" y "admin_borrar"

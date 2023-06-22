@@ -139,7 +139,7 @@ while salir == False:
                             print('No hubo coincidencias')
                             break
                         else:
-                            baseDeDatos.admin_borrar(registro_existe, usuario) 
+                            baseDeDatos.admin_borrar(nroRegistro) 
                             print('Se borró con éxito')    
                             break    
     if (salir == True):

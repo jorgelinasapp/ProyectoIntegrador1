@@ -31,10 +31,18 @@ class BaseDeDatos:
         return False
 
     def buscar_por_nroRegistro(self, nroRegistro):
-        for registro in self.__baseDeDatos__:
-            if (registro.nroRegistro == nroRegistro):
-                return registro
+        query = """
+                SELECT *
+                FROM normativa 
+                WHERE id_Normativa = %s;
+                """
+        params = (nroRegistro,)
+        self.mycursor.execute(query, params)
+        result = self.mycursor.fetchone()
+        if result:
+            return result
         return False
+
     
     def buscar_por_palabra_clave(self, palabraClave):
         query = """SELECT n.NroNormativa, n.Fecha, n.Descripcion, c.TipoCategoria, j.Jurisdiccion, o.OrganoLegislativo, t.TipoNormativa 
@@ -62,14 +70,9 @@ class BaseDeDatos:
             
             query = '''
                     INSERT INTO normativa (NroNormativa, id_TipoNormativa, Fecha, Descripcion, id_Categoria, id_Jurisdiccion, id_OrganoLegislativo, PalabrasClave)
-                    SELECT %s, t.id_TipoNormativa, %s, %s, c.id_Categoria, j.id_Jurisdiccion, o.id_OrganoLegislativo, %s
-                    FROM categoria c
-                    JOIN jurisdiccion j ON j.Jurisdiccion = %s
-                    JOIN organolegislativo o ON o.OrganoLegislativo = %s
-                    JOIN tiponormativa t ON t.TipoNormativa = %s
-                    WHERE c.TipoCategoria = %s;
+                    SELECT %s, %s,  %s, %s, %s, %s, %s, %s                       
                     '''
-            params = (registro.nroNormativa, registro.tipoNormativa, fecha_mysql, registro.descripcion, stringDePalabras, registro.jurisdiccion, registro.organoLegislativo, registro.tipoCategoria)
+            params = (registro.nroNormativa, registro.tipoNormativa, fecha_mysql, registro.descripcion, registro.tipoCategoria, registro.jurisdiccion, registro.organoLegislativo, stringDePalabras)
             self.mycursor.execute(query, params)
             self.mydb.commit()
             return True
@@ -77,23 +80,27 @@ class BaseDeDatos:
     
     def admin_modificar(self, registro, usuario):
         if (usuario["rol"] == "admin" and isinstance(registro, Registro)):
-            for item in self.__baseDeDatos__:
-                if item.nroRegistro == registro.nroRegistro:
-                    item.tipoNormativa = registro.tipoNormativa
-                    item.nroNormativa = registro.nroNormativa
-                    item.fecha = registro.fecha
-                    item.descripcion = registro.descripcion
-                    item.categoria = registro.categoria
-                    item.jurisdiccion = registro.jurisdiccion
-                    item.organoLegislativo = registro.organoLegislativo
-                    item.palabrasClaves = registro.palabrasClaves
+            fecha_str = registro.fecha
+            fecha = datetime.strptime(fecha_str, "%d/%m/%y")
+            fecha_mysql = fecha.strftime("%Y-%m-%d")
+            stringDePalabras = ', '.join(registro.palabrasClaves) 
+            query = '''
+                    UPDATE normativa 
+                    SET NroNormativa = %s, id_TipoNormativa = %s, Fecha= %s, Descripcion= %s, id_Categoria= %s, id_Jurisdiccion= %s, id_OrganoLegislativo= %s, PalabrasClave= %s
+                    WHERE id_Normativa = %s
+                    '''
+            params = (registro.nroNormativa, registro.tipoNormativa, fecha_mysql, registro.descripcion, registro.tipoCategoria, registro.jurisdiccion, registro.organoLegislativo, stringDePalabras, registro.nroRegistro )
+            self.mycursor.execute(query, params)
+            self.mydb.commit()
             return True
         return False
 
-    def admin_borrar(self, registro, usuario):
-        if usuario["rol"] == "admin" and isinstance(registro, Registro):
-            for item in self.__baseDeDatos__:
-                if item.nroRegistro == registro.nroRegistro:
-                    self.__baseDeDatos__.remove(item)
-                    return True
-        return False
+    def admin_borrar(self, nroRegistro):
+        query = '''
+                DELETE FROM normativa 
+                WHERE id_Normativa = %s
+                '''
+        params = (nroRegistro,)
+        self.mycursor.execute(query, params)
+        self.mydb.commit()
+        return True
