@@ -15,7 +15,7 @@ class BaseDeDatos:
 
     def buscar_por_ley(self, ley):
         query = """
-                SELECT n.NroNormativa, n.Fecha, n.Descripcion, c.TipoCategoria, j.Jurisdiccion, o.OrganoLegislativo, t.TipoNormativa 
+                SELECT n.NroNormativa, n.Fecha, n.Descripcion, c.TipoCategoria, j.Jurisdiccion, o.OrganoLegislativo, t.TipoNormativa, n.PalabrasClave
                 FROM normativa n 
                 JOIN categoria c ON c.id_categoria = n.id_Categoria 
                 JOIN jurisdiccion j ON j.id_Jurisdiccion = n.id_Jurisdiccion 
@@ -45,7 +45,7 @@ class BaseDeDatos:
 
     
     def buscar_por_palabra_clave(self, palabraClave):
-        query = """SELECT n.NroNormativa, n.Fecha, n.Descripcion, c.TipoCategoria, j.Jurisdiccion, o.OrganoLegislativo, t.TipoNormativa 
+        query = """SELECT n.NroNormativa, n.Fecha, n.Descripcion, c.TipoCategoria, j.Jurisdiccion, o.OrganoLegislativo, t.TipoNormativa, n.PalabrasClave 
                 FROM normativa n 
                 JOIN categoria c ON c.id_categoria = n.id_Categoria 
                 JOIN jurisdiccion j ON j.id_Jurisdiccion = n.id_Jurisdiccion 
@@ -81,8 +81,8 @@ class BaseDeDatos:
     def admin_modificar(self, registro, usuario):
         if (usuario["rol"] == "admin" and isinstance(registro, Registro)):
             fecha_str = registro.fecha
-            fecha = datetime.strptime(fecha_str, "%d/%m/%y")
-            fecha_mysql = fecha.strftime("%Y-%m-%d")
+            fecha = datetime.strptime(fecha_str, "%dd/%mm/%yyyy")
+            fecha_mysql = fecha.strftime("%YYYY-%mm-%dd")
             stringDePalabras = ', '.join(registro.palabrasClaves) 
             query = '''
                     UPDATE normativa 

@@ -47,13 +47,11 @@ def formulario_registro(usuario, baseDeDatos, nroRegistro):
             baseDeDatos.admin_agregar(nuevoRegistro, usuario)
             print('Se ha agregado con éxito \n')
             print('')
-            print(baseDeDatos.buscar_por_ley(nroNormativa))
             print('')
             break
         else:
             registroExistente = Registro()
             registroExistente.modificar_registro(nroRegistro, tipoNormativa, nroNormativa, fecha, descripcion, categoria, jurisdiccion, organoLegislativo, palabrasClaves)
-            baseDeDatos.admin_modificar(registroExistente, usuario)
             print('Se ha modificado con éxito')
             print('')
             for clave, valor in registroExistente.imprimir():

@@ -85,6 +85,7 @@ while salir == False:
                         print("Jurisdicción: "+ consultaPorLey[4])
                         print("Órgano Legislativo: " + consultaPorLey[5])
                         print("Tipo Normativa: " + consultaPorLey[6])
+                        print('Palabras Clave: '+ consultaPorLey[7])
                     else:
                         print('No hubo coincidencias')
                         break
@@ -101,6 +102,7 @@ while salir == False:
                             print("Jurisdicción: "+ objeto[4])
                             print("Órgano Legislativo: " + objeto[5])
                             print("Tipo Normativa: " + objeto[6])
+                            print('Palabra clave: ' + objeto[7])
                     else: 
                         print('No hubo coincidencias')
                         break
