@@ -24,3 +24,6 @@ Trabajo Final Integrador
 | Gustavo        | Torres             | betogus2009@gmail.com              | https://github.com/betogus       | GOT                |
 | Angel          | Villarreal Barroso | crangelvillarrealbarroso@gmail.com | https://github.com/Angelvill321  | AVB                |
 | Mónica Valeria | Zapata             | profemonicazapata@gmail.com        | https://github.com/MonicaVZapata | MVZ                |
+
+## Aclaraciones:
+EL programa se ejecuta con Python a través del archivo main.py.-
