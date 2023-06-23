@@ -14,5 +14,3 @@ conexion= mysql.connector.connect(
     host=host,
     port=port,
     database=database)
-
-print(conexion)
