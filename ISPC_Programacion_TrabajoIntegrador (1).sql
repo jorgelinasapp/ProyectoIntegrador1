@@ -3,11 +3,11 @@ CREATE TABLE `Normativa`(
     `NroNormativa` INT NOT NULL,
     `id_TipoNormativa` INT NOT NULL,
     `Fecha` DATE NOT NULL,
-    `Descripcion` VARCHAR(255) NOT NULL,
+    `Descripcion` VARCHAR(450) NOT NULL,
     `id_Categoria` INT NOT NULL,
     `id_Jurisdiccion` INT NOT NULL,
     `id_OrganoLegislativo` INT NOT NULL,
-    `PalabrasClave` VARCHAR(255) NOT NULL
+    `PalabrasClave` VARCHAR(450) NOT NULL
 );
 CREATE TABLE `Jurisdiccion`(
     `id_Jurisdiccion` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
