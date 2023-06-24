@@ -1,4 +1,4 @@
-### Monica Zapata
+# Monica Zapata
 
 ## Contribuyendo
 
